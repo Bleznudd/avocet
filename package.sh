@@ -33,7 +33,7 @@ find . -type f \! -name SHA256SUMS -exec shasum --algorithm 256 {} \; >> SHA256S
 cd -
 
 # Make the tarball
-TARFILE="eufy-adapter-${version}${TARFILE_SUFFIX}.tgz"
+TARFILE="avocet-${version}${TARFILE_SUFFIX}.tgz"
 tar czf ${TARFILE} package
 
 shasum --algorithm 256 ${TARFILE} > ${TARFILE}.sha256sum

@@ -30,7 +30,7 @@ Built around PicoVoice and the Respeaker 2-MIC hat.
 ### Naming convention
 
 Picovoice can't handle unseen words. This means that it cannot turn on your _custom-named_ device.
-To use this adapter you will need to name things in a logic way, using a combination of the `locations` and `things` you can find in the [English yaml](./resources/eng/english.yml) file. (`things` alone are also ok)
+To use this adapter you will need to name things in a logic way, using a combination of the `locations` and `things` you can find in the [English yaml](./resources/languages/en/english.yml) file. (`things` alone are also ok)
 
 | Good Examples           | Bad Examples           |
 |-------------------------|------------------------|
@@ -44,7 +44,7 @@ There are currently available +50 device names and +20 locations, for +1000 poss
 
 ### Customization
 
-Since all the intents, things, properties and actions are defined in one single [yaml](./resources/eng/english.yml), customization is trivial.
+Since all the intents, things, properties and actions are defined in one single [yaml](./resources/languages/en/english.yml), customization is trivial.
 Upon editing the file with your custom phrase, you can upload it on the [picovoice console](https://console.picovoice.ai/) and train a new model. The obtained file needs to be unpacked and copied to replace the original one
 
 ### Available languages
@@ -56,7 +56,7 @@ As of February 2022, Picovoice is available 4 languages:
 - French
 - Spanish
 
-but this repository contains **only** the [English maps](./resources/eng/maps) and [English intent yaml](./resources/eng/english.yml) file (and the corresponding trained model). To use other languages, these files need to be translated, then used as a training base to get the model, that can be substituted to the default one.
+but this repository contains **only** the [English maps](./resources/languages/en/maps) and [English intent yaml](./resources/languages/en/english.yml) file (and the corresponding trained model). To use other languages, these files need to be translated, then used as a training base to get the model, that can be substituted to the default one.
 
 > **NOTE:**
 > I do not know this languages (apart from English) and thus I cannot implement them by myself. If you feel like you could be a translator, open an issue to discuss this opportunity, or even better a PR
