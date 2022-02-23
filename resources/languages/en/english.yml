@@ -1,0 +1,232 @@
+context:
+  expressions:
+    getGeneralProperty:
+      - (please)(can you) get (me)(the) $Property:property of (the) ($Location:location) $Thing:thing (please)
+      - (please) what's (the) $Property:property of (the) ($Location:location) $Thing:thing (please)
+      - (please) how is (the) $Property:property of (the) ($Location:location) $Thing:thing (please)
+      - (please)(can you) tell me (the) $Property:property of (the) ($Location:location) $Thing:thing (please)
+      - (please)(can you) get (me)(the) ($Location:location) $Thing:thing $Property:property (please)
+      - (please) what's (the) ($Location:location) $Thing:thing $Property:property (please)
+      - (please) how is (the) ($Location:location) $Thing:thing $Property:property (please)
+      - (please)(can you) tell me (the) ($Location:location) $Thing:thing $Property:property (please)
+    getOnOffProperty:
+      - (please) how is (the) ($Location:location) $Thing:thing (please)
+      - is (the) ($Location:location) $Thing:thing [on, off, open, closed, locked, unlocked]
+      - have I left (the) ($Location:location) $Thing:thing [on, off, open, closed, locked, unlocked]
+      - has we left (the) ($Location:location) $Thing:thing [on, off, open, closed, locked, unlocked]
+      - has someone left (the) ($Location:location) $Thing:thing [on, off, open, closed, locked, unlocked]
+      - has (the) ($Location:location) $Thing:thing [started, stopped]
+    setGeneralProperty:
+      - (please) set (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
+      - (please) make (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
+      - (please) turn (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
+      - (please) change (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)     
+      - (please) switch (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)     
+      - (please) set (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
+      - (please) make (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
+      - (please) turn (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
+      - (please) change (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
+      - (please) switch (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
+    setOnOffProperty:
+      - (please) set (the) ($Location:location) $Thing:thing $OnOffStatus:status (please) (for) ($pv.TwoDigitInteger:for) ($Time:time)
+      - (please) make (the) ($Location:location) $Thing:thing $OnOffStatus:status (please)
+      - (please) turn (the) ($Location:location) $Thing:thing $OnOffStatus:status (please)
+      - (please) switch (the) ($Location:location) $Thing:thing (to) $OnOffStatus:status (please)
+      - (please) set $OnOffStatus:status (the) ($Location:location) $Thing:thing (please)
+      - (please) turn $OnOffStatus:status (the) ($Location:location) $Thing:thing (please)
+      - (please) set $OnOffStatus:status (the) $Thing:thing (in the) ($Location:location) (please)
+      - (please) turn $OnOffStatus:status (the) $Thing:thing (in the) ($Location:location) (please)
+      - (please) switch (to) $OnOffStatus:status (the) ($Location:location) $Thing:thing (please)
+      - (please) switch (to) $OnOffStatus:status (the) $Thing:thing (in the) ($Location:location) (please)
+      - (please) $OnOffStatus:status (the) ($Location:location) $Thing:thing (please)
+    setColorProperty:
+      - (please) set (the) ($Location:location) $Thing:thing (to) $ColorStatus:color (please)
+      - (please) make (the) ($Location:location) $Thing:thing (to) $ColorStatus:color (please)
+      - (please) change (the) ($Location:location) $Thing:thing (to) $ColorStatus:color (please)
+      - (please) switch (the) ($Location:location) $Thing:thing (to) $ColorStatus:color (please)
+      - (please) turn (the) ($Location:location) $Thing:thing (to) $ColorStatus:color (please)
+      - (please) turn $ColorStatus:color (the) ($Location:location) $Thing:thing (please)
+      - (please) make $ColorStatus:color (the) ($Location:location) $Thing:thing (please)
+      - (please) change (to) $ColorStatus:color (the) ($Location:location) $Thing:thing (please)
+      - (please) switch (to) $ColorStatus:color (the) ($Location:location) $Thing:thing (please)
+      - (please) turn $ColorStatus:color (the) $Thing:thing (in the) ($Location:location) (please)
+      - (please) make $ColorStatus:color (the) $Thing:thing (in the) ($Location:location) (please)
+      - (please) change (to) $ColorStatus:color (the) $Thing:thing (in the) ($Location:location) (please)
+      - (please) switch (to) $ColorStatus:color (the) $Thing:thing (in the) ($Location:location) (please)
+    setLevelProperty:
+      - (please) set (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (please)
+      - (please) make (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (please)
+      - (please) change (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (please)
+      - (please) turn (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (please)
+      - (please) turn (to) [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (please)
+      - (please) make [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (please)
+      - (please) change (to) [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (please)
+      - (please) switch (to) [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (please)
+      - (please) turn (to) [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (please)
+      - (please) make [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (please)
+      - (please) change (to) [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (please)
+      - (please) switch (to) [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (please)
+    exeAction:
+      - (please) set (the) ($Location:location) $Thing:thing (to) $Action:action (please)
+      - (please) set (the) $Thing:thing (in the) ($Location:location) (to) $Action:action (please)
+      - (please) $Action:action (the)($Location:location) $Thing:thing (please)
+      - (please) $Action:action (the) $Thing:thing (in the) ($Location:location) (please)
+    specialSelfName:
+      - what's your name
+      - how can I call you
+      - who are you
+      - (please) tell me who you are (please)
+    specialTellJoke:
+      - (please) tell me a joke (please)
+      - (please) make me laugh (please)
+      - (please) cheer me up (please)
+    specialFlipCoin:
+      - (please) flip [a, the] coin (please)
+      - (please) (play) heads or tails (please)
+    specialRollDice:
+      - (please) roll [a, the] dice (please)
+    specialTime:
+      - what time is it
+      - what is the time
+      - do you know the time
+      - (can you) (please) tell me the time (please)
+      - am I late
+      - are we late
+    specialDay:
+      - what day is [it, today]
+      - what is the date today
+      - what day of the week is [it, today]
+    test:
+      - do a test
+  slots:
+    OnOffStatus:
+      - on
+      - off
+      - start
+      - stop
+      - open
+      - closed
+    ColorStatus:
+      - red
+      - green
+      - blue
+      - white
+      - pink
+      - yellow
+      - orange
+      - brown
+      - light blue
+      - purple
+    HeatStatus:
+      - heat
+      - cool
+      - auto
+    Property:
+      - status
+      - power
+      - level
+      - color
+      - color mode
+      - color temperature
+      - volume
+      - brightness
+      - temperature
+      - target temperature
+      - temperature target
+      - mode
+      - humidity
+      - pressure
+      - voltage
+      - current
+      - frequency
+      - density
+      - concentration
+      - ppm
+      - leak
+      - movement
+      - motion
+      - smoke
+    Thing:
+      - radio
+      - music
+      - door
+      - window
+      - light
+      - lamp
+      - bulb
+      - lightbulb
+      - led
+      - led strip
+      - chandelier
+      - floor lamp
+      - plug
+      - tv
+      - lock
+      - thermostat
+      - thermometer
+      - valve
+      - speaker
+      - stereo
+      - microphone
+      - voice assistant
+      - fridge
+      - fan
+      - camera
+      - barometer
+      - pressure sensor
+      - motion sensor
+      - light sensor
+      - temperature sensor
+      - humidity sensor
+      - energy sensor
+      - energy monitor
+      - smoke sensor
+      - co two sensor
+      - co sensor
+      - pm ten sensor
+      - pm two point five sensor
+      - air quality sensor
+      - air quality
+      - leak sensor
+      - video camera
+      - color sensor
+      - door sensor
+      - window sensor
+      - vacuum
+      - hoover
+      - dishwasher
+      - washing machine
+      - curtain
+      - blind
+      - timer
+      - scene
+      - scene manager
+      - scene controller
+    Location:
+      - inside
+      - outside
+      - bedroom
+      - bed
+      - kitchen
+      - bathroom
+      - shower
+      - garage
+      - garden
+      - dining room
+      - hall
+      - stairs
+      - roof
+      - living room
+      - couch
+      - office
+      - desk
+      - porch
+      - front
+      - back
+    Action:
+      - day
+      - morning
+      - evening
+      - night
+      - lock
+      - unlock

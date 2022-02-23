@@ -1,0 +1,39 @@
+# This is actually not a map, but a collection of responses to randomly choose from 
+# when a specific special intent is received
+#
+# needs:
+# from datetime import datetime
+# from random import random
+#
+{
+    "specialSelfName":[
+        "\"I'm \" + self.adapter.wakeword + \", your personal home assistant\"",
+        "\"You can call me however you like, just remember to change the settings\"",
+        "\"I'm \" + self.adapter.wakeword + \", nice to meet you\"",
+        "\"You asked for a home assistant and here I am. I'm \" + self.adapter.wakeword ",
+    ],
+    "specialTellJoke":[
+        "\"What's the best thing about Switzerland? I don't know, but the flag is a big plus\"",
+        "\"Helvetica and times new roman walk into a bar. Get out of here!, shouts the bartender. We don't serve your type\"",
+        "\"Why don't scientists trust atoms? Because they make up everything\"",
+        "\"What kind of exercise do lazy people do? Diddly squats\"",
+        "\"Why do French people eat snails? They don't like fast food\"",
+        "\"Two artists had an art contest. It ended in a draw\"",
+        "\"I have a fear of speed bumps. But I am slowly getting over it\"",
+        "\"What did the buffalo say when his son left for college? Bison\"",
+        "\"Why was six afraid of seven? Because seven ate nine\"",
+        "\"Why doesn't the sun go to college? Because it has a million degrees\""
+    ],
+    "specialFlipCoin":[
+        "\"The coin is showing \" + (\"head\" if random() < 0.5 else \"tail\")" 
+    ],
+    "specialRollDice":[
+        "\"The dice stopped on \" + str(int((random()*5)+1))" 
+    ],
+    "specialTime":[
+        "\"It's \" + str(datetime.now().hour) + \" and \" + str(datetime.now().minute)" 
+    ],
+    "specialDay":[
+        "\"Today it's the \" + str(datetime.now().day) + \"/\" + str(datetime.now().month) + \"/\" + str(datetime.now().year) " 
+    ],
+}

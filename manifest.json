@@ -1,0 +1,59 @@
+{
+  "author": "Bleznudd",
+  "description": "Lightweight, local and polyglot voice assistant. Built on PicoVoice for the Respeaker 2-MIC hat",
+  "gateway_specific_settings": {
+    "webthings": {
+      "exec": "python3 {path}/main.py",
+      "primary_type": "adapter",
+      "strict_max_version": "*",
+      "strict_min_version": "0.1"
+    }
+  },
+  "homepage_url": "https://github.com/Bleznudd/avocet",
+  "id": "avocet",
+  "license": "MPL-2.0",
+  "manifest_version": 1,
+  "name": "Avocet",
+  "short_name": "Avocet",
+  "version": "0.1",
+  "options": {
+    "default": {
+      "language": "eng",
+      "wakeword": "avocet"
+    },
+    "schema": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "description": "To be allowed to get information on all your devices, you have to create an 'authorization' code. You can generate it yourself under Settings -> Developer -> Create local authorization.",
+          "type": "string"
+        },
+        "access_key": {
+          "description": "To use picovoice's voice to intent engine, you need to provide your own personal access key. You can create one at: https://console.picovoice.ai/access_key",
+          "type": "string"
+        },
+        "language": {
+          "description": "Select the language in which you'd like to speak with the assistant",
+          "type": "string",
+          "enum": [
+            "en"
+          ]
+        },
+        "wakeword": {
+          "description": "Select the wakeword to trigger the assistant",
+          "type": "string",
+          "enum": [
+            "avocet",
+            "porcupine", 
+            "bumblebee",
+            "grasshopper",
+            "hey siri",
+            "ok google",
+            "alexa",
+            "jarvis"
+          ]
+        }
+      }
+    }
+  }
+}
