@@ -2,6 +2,8 @@
 *.sha256sum
 *.swp
 *.tgz
+.vscode/
+virtual/
 lib/
 package/
 SHA256SUMS

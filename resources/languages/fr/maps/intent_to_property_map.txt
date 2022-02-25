@@ -1,0 +1,14 @@
+{
+    "getGeneralProperty":{
+        "état":"OnOffProperty",
+        "niveau":"LevelProperty",
+        "volume":"LevelProperty",
+        "couleur":"ColorProperty",
+    },
+    "setGeneralProperty":{
+        "état":"OnOffProperty",
+        "niveau":"LevelProperty",
+        "volume":"LevelProperty",
+        "couleur":"ColorProperty",
+    },
+}

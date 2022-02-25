@@ -17,16 +17,16 @@ context:
       - has someone left (the) ($Location:location) $Thing:thing [on, off, open, closed, locked, unlocked]
       - has (the) ($Location:location) $Thing:thing [started, stopped]
     setGeneralProperty:
-      - (please) set (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
-      - (please) make (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
-      - (please) turn (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
-      - (please) change (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)     
-      - (please) switch (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)     
-      - (please) set (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
-      - (please) make (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
-      - (please) turn (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
-      - (please) change (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
-      - (please) switch (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (please)
+      - (please) set (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percent) (please)
+      - (please) make (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percent) (please)
+      - (please) turn (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percent) (please)
+      - (please) change (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (plea(percent) se)     
+      - (please) switch (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (plea(percent) se)     
+      - (please) set (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percent) (please)
+      - (please) make (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percent) (please)
+      - (please) turn (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percent) (please)
+      - (please) change (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percent) (please)
+      - (please) switch (the) ($Location:location) $Thing:thing $Property:property to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percent) (please)
     setOnOffProperty:
       - (please) set (the) ($Location:location) $Thing:thing $OnOffStatus:status (please) (for) ($pv.TwoDigitInteger:for) ($Time:time)
       - (please) make (the) ($Location:location) $Thing:thing $OnOffStatus:status (please)
@@ -54,18 +54,18 @@ context:
       - (please) change (to) $ColorStatus:color (the) $Thing:thing (in the) ($Location:location) (please)
       - (please) switch (to) $ColorStatus:color (the) $Thing:thing (in the) ($Location:location) (please)
     setLevelProperty:
-      - (please) set (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (please)
-      - (please) make (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (please)
-      - (please) change (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (please)
-      - (please) turn (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (please)
-      - (please) turn (to) [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (please)
-      - (please) make [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (please)
-      - (please) change (to) [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (please)
-      - (please) switch (to) [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (please)
-      - (please) turn (to) [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (please)
-      - (please) make [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (please)
-      - (please) change (to) [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (please)
-      - (please) switch (to) [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (please)
+      - (please) set (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (percent) (please)
+      - (please) make (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (percent) (please)
+      - (please) change (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (percent) (please)
+      - (please) turn (the) ($Location:location) $Thing:thing (to) [$pv.TwoDigitInteger:value] (percent) (please)
+      - (please) turn (to) [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (percent) (please)
+      - (please) make [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (percent) (please)
+      - (please) change (to) [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (percent) (please)
+      - (please) switch (to) [$pv.TwoDigitInteger:value] (the) ($Location:location) $Thing:thing (percent) (please)
+      - (please) turn (to) [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (percent) (please)
+      - (please) make [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (percent) (please)
+      - (please) change (to) [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (percent) (please)
+      - (please) switch (to) [$pv.TwoDigitInteger:value] (the) $Thing:thing (in the) ($Location:location) (percent) (please)
     exeAction:
       - (please) set (the) ($Location:location) $Thing:thing (to) $Action:action (please)
       - (please) set (the) $Thing:thing (in the) ($Location:location) (to) $Action:action (please)
@@ -205,6 +205,7 @@ context:
     Location:
       - inside
       - outside
+      - corridor
       - bedroom
       - bed
       - kitchen
@@ -213,7 +214,9 @@ context:
       - garage
       - garden
       - dining room
+      - entrance
       - hall
+      - hallway
       - stairs
       - roof
       - living room

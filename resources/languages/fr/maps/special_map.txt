@@ -1,0 +1,27 @@
+# This is actually not a map, but a collection of responses to randomly choose from 
+# when a specific special intent is received
+#
+# needs:
+# from datetime import datetime
+# from random import random
+#
+{
+    "specialSelfName":[
+        "\"Ceci n'est qu'une démo, je ne peux pas le faire pour le moment\"",
+    ],
+    "specialTellJoke":[
+        "\"Ceci n'est qu'une démo, je ne peux pas le faire pour le moment\"",
+    ],
+    "specialFlipCoin":[
+        "\"Ceci n'est qu'une démo, je ne peux pas le faire pour le moment\"",
+    ],
+    "specialRollDice":[
+        "\"Ceci n'est qu'une démo, je ne peux pas le faire pour le moment\"",
+    ],
+    "specialTime":[
+        "\"Ceci n'est qu'une démo, je ne peux pas le faire pour le moment\"",
+    ],
+    "specialDay":[
+        "\"Ceci n'est qu'une démo, je ne peux pas le faire pour le moment\"",
+    ],
+}

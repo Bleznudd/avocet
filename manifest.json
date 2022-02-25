@@ -36,7 +36,8 @@
           "description": "Select the language in which you'd like to speak with the assistant",
           "type": "string",
           "enum": [
-            "en"
+            "en",
+            "fr"
           ]
         },
         "wakeword": {

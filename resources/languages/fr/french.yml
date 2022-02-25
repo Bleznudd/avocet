@@ -1,0 +1,35 @@
+
+# THIS IS JUST A DEMO FILE
+# IF YOU WANT TO USE FRENCH, PLEASE TRANSLATE THE ENGLISH.YAML 
+# FILE AND OPEN A PULL REQUEST TO GET YOUR MODEL TRAINED
+
+context:
+  expressions:
+    getGeneralProperty:
+      - quelle est [le, la , les] $Property:property de [le, la , les] $Thing:thing (dans) (la) (le) ($Location:location)
+    setGeneralProperty:
+     - [définir, régler, changer] [le, la , les] $Property:property de [le, la , les] $Thing:thing (dans) (la) (le) ($Location:location) [a, sur, en] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status]
+  slots:
+    OnOffStatus:
+      - on
+      - off
+    ColorStatus:
+      - rouge
+      - vert
+      - bleu
+      - blanc
+    Property:
+      - état
+      - couleur
+      - niveau
+      - volume
+    Thing:
+      - radio
+      - lampe
+      - ampoule
+      - télévision
+    Location:
+      - cuisine
+      - toilette
+      - chambre à coucher
+      - garage

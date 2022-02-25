@@ -15,8 +15,6 @@ import time
 import os
 
 from .avocet_property import avocetSwitchProperty, avocetIntentProperty
-from .util import MIN_TEMPERATURE, MAX_TEMPERATURE, relative_temp_to_kelvin
-
 
 _POLL_INTERVAL = 3
 
@@ -31,30 +29,21 @@ class avocetDevice(Device):
         self.status = False
         self.intent = ""
         self.voice_service = VoiceThread(
-            os.path.join(os.path.dirname(__file__), '../resources/languages/' + self.adapter.language + '/wake/' + self.adapter.wakeword + '_raspberry-pi.ppn'),
+            # Wakewords are set to be always the ones with english accent
+            os.path.join(os.path.dirname(__file__), '../resources/languages/en/wake/' + self.adapter.wakeword + '_raspberry-pi.ppn'),
             os.path.join(os.path.dirname(__file__), '../resources/languages/' + self.adapter.language + '/default_raspberry-pi.rhn'),
+            os.path.join(os.path.dirname(__file__), '../resources/languages/en/porcupine_params_en.pv'),
+            os.path.join(os.path.dirname(__file__), '../resources/languages/' + self.adapter.language + '/rhino_params_' + self.adapter.language + '.pv'),
             self.adapter.access_key, 
             self.set_intent
         )
+        self.responses = literal_eval(open(os.path.join(os.path.dirname(__file__), "../resources/languages/" + self.adapter.language + "/maps/responses.txt"), "r").read())
         self.special_map = literal_eval(open(os.path.join(os.path.dirname(__file__), "../resources/languages/" + self.adapter.language + "/maps/special_map.txt"), "r").read())
         self.intent_to_property_map = literal_eval(open(os.path.join(os.path.dirname(__file__), "../resources/languages/" + self.adapter.language + "/maps/intent_to_property_map.txt"), "r").read())
         self.value_map = literal_eval(open(os.path.join(os.path.dirname(__file__), "../resources/languages/" + self.adapter.language + "/maps/value_map.txt"), "r").read())
         self.inv_value_map = {v: k for k, v in self.value_map.items()}
         self.alive = False
         self.switch()
-        # self.voice_service.run()
-
-        # t = threading.Thread(target=self.poll)
-        # t.daemon = True
-        # t.start()
-
-    # def poll(self):
-    #     """Poll the device for changes."""
-    #     if not(self.voice_serviceis_alive()):
-    #             self.voice_servicerun()
-    #     self.voice_servicestop()
-    #     self.voice_servicejoin()
-    #     time.sleep(5)
 
     def is_on(self):
         return self.status
@@ -81,15 +70,12 @@ class avocetDevice(Device):
     Generate and mp3 file and plays it
     """
     def speak(self, value):
-        self.switch()
         try:
             response = gtts.gTTS(value, lang=self.adapter.language)
             response.save('response.mp3')
             os.system("ffplay -nodisp -autoexit -volume 50 response.mp3 > /dev/null 2>&1")
-        except gtts.tts.gTTSError as e:
+        except gtts.tts.gTTSError:
             print("COULD NOT RETRIVE FEEDBACK SPEECH")
-        finally:
-            self.switch()
 
     """
     When an intention is received, this method parse it and execute the correct command
@@ -107,49 +93,48 @@ class avocetDevice(Device):
         else:
             target = None
 
-        # print("= THING ============== " + str(target))
         prop = (self.intent_to_property_map[intent.get('intent')] if not(isinstance(self.intent_to_property_map[intent.get('intent')], dict)) else self.intent_to_property_map[intent.get('intent')][intent.get('slots')[0].get('property')])
+        # print("= THING ============== " + str(target))
         # print("= PROPE ============== " + str(prop))
         if not(isinstance(target, type(None))):
             if self.adapter.href_has_property(target, prop) or self.adapter.href_has_action(target, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else intent.get('slots')[0].get('to'))):
                 if intent.get('intent_type') == 0:
                     val = next(iter(self.adapter.get_property(target, prop).values()))
                     if isinstance(val, int) and not(isinstance(val, bool)):
-                        val = 'at ' + str(val)
+                        val = self.responses[2] + str(val)
                     else:
                         val = self.inv_value_map.get(val)
-                    # print(str(intent.get('slots')[0].get('thing')))
-                    # print(type(val))
-                    # print(str(val))
-                    # print(str(next(iter(self.adapter.get_property(target, prop).values()))))
-                    # print(str(self.adapter.get_property(target, prop)))
-                    # print(str(self.inv_value_map))
-                    self.speak('The ' + str(intent.get('slots')[0].get('thing')) + ' is ' + val)
+                    self.speak(self.responses[0] + str(intent.get('slots')[0].get('thing')) + self.responses[1] + val)
                 elif intent.get('intent_type') == 1:
-                    # if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))):
-                    #     print("= VALUE ============== " + str(self.value_map.get(intent.get('slots')[0].get('to'))), type(self.value_map.get(intent.get('slots')[0].get('to'))))
-                    # else:
-                    #     print("= VALUE ============== " + str(intent.get('slots')[0].get('to')), type(intent.get('slots')[0].get('to')))
                     done = self.adapter.set_property(target, prop, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else int(intent.get('slots')[0].get('to'))))
                     if done:
-                        self.speak('I\'ve setted the ' + str(intent.get('slots')[0].get('thing')) + ' to ' + str(intent.get('slots')[0].get('to')))
+                        # "I've setted the thing to [val]"
+                        self.speak(self.responses[7] + str(intent.get('slots')[0].get('thing')) + self.responses[3] + str(intent.get('slots')[0].get('to')))
                     else:
-                        self.speak('I could not set the property')
+                        # "I could not set the property"
+                        self.speak(self.responses[8] + self.responses[4])
                 elif intent.get('intent_type') == 2:
                     done = self.adapter.exe_action(target, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else intent.get('slots')[0].get('to')))
                     if done:
-                        self.speak('I\'ve setted the ' + str(intent.get('slots')[0].get('thing')) + ' to ' + str(intent.get('slots')[0].get('to')))
+                        # "I've setted the thing to [val]"
+                        self.speak(self.responses[7] + str(intent.get('slots')[0].get('thing')) + self.responses[3] + str(intent.get('slots')[0].get('to')))
                     else:
-                        self.speak('I could not execute the action')
+                        # "I've setted execute the action"
+                        self.speak(self.responses[10] + self.responses[6])
                 else:
-                    self.speak('I don\'t know this intent type')
+                    # "I don't know this intent type"
+                    self.speak(self.responses[11])
             else:
-                self.speak('I could not find the property')
+                # "I could not find the property"
+                self.speak(self.responses[9] + self.responses[4])
         else:
             if intent.get('intent_type') == 3:
+                self.switch()
                 self.speak(eval(self.special_map.get(intent.get('intent'))[int(random()*len(self.special_map.get(intent.get('intent'))))]))
+                self.switch()
             else:
-                self.speak('I could not find the device')
+                # "I could not find the device"
+                self.speak(self.responses[9] + self.responses[5])
         return True
         
 class VoiceThread(threading.Thread):
@@ -157,6 +142,8 @@ class VoiceThread(threading.Thread):
             self,
             keyword_path,
             context_path,
+            porcupine_model_path, 
+            rhino_model_path,
             access_key,
             set_function,
             porcupine_sensitivity=0.65,
@@ -173,7 +160,10 @@ class VoiceThread(threading.Thread):
             context_path=context_path,
             inference_callback=inference_callback,
             porcupine_sensitivity=porcupine_sensitivity,
-            rhino_sensitivity=rhino_sensitivity)
+            rhino_sensitivity=rhino_sensitivity,
+            porcupine_model_path=porcupine_model_path,
+            rhino_model_path=rhino_model_path
+            )
 
         self.daemon = True
         self._context = self._picovoice.context_info

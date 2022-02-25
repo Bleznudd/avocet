@@ -51,12 +51,21 @@ Upon editing the file with your custom phrase, you can upload it on the [picovoi
 
 As of February 2022, Picovoice is available 4 languages:
 
-- English
-- German
-- French
-- Spanish
+- English <sup>1</sup>
+- German <sup>3</sup>
+- French <sup>2</sup>
+- Spanish <sup>3</sup>
 
-but this repository contains **only** the [English maps](./resources/languages/en/maps) and [English intent yaml](./resources/languages/en/english.yml) file (and the corresponding trained model). To use other languages, these files need to be translated, then used as a training base to get the model, that can be substituted to the default one.
+<small>
+
+<sup>1</sup> Avocet fully support this language
+<sup>2</sup> Avocet has the language available as a demo with limited functionality
+<sup>3</sup> Avocet has no valid translation yet, not even for a demo
+
+</small>
+
+as of now, this repository fully support **only** the [English maps](./resources/languages/en/maps) and [English intent yaml](./resources/languages/en/english.yml) file (and the corresponding trained model). To use other languages, these files need to be translated, then used as a training base to get the model, that can later be added to the project.
+
 
 > **NOTE:**
 > I do not know this languages (apart from English) and thus I cannot implement them by myself. If you feel like you could be a translator, open an issue to discuss this opportunity, or even better a PR

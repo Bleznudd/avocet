@@ -1,0 +1,8 @@
+{
+    "on":True,
+    "off":False,
+    "rouge":"#ff0000",
+    "vert":"#00ff00",
+    "bleu":"#0000ff",
+    "blanc":"#ffffff",
+}
