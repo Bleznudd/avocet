@@ -143,7 +143,7 @@ class avocetAdapter(Adapter):
             
         except Exception as ex:
             print("Error in http GET, returned json: " + str(ex))
-            return {"error": 500}
+            return {"error": "not available"}
 
     def api_put(self, api_path, json_dict):
         try:

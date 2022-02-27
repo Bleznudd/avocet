@@ -67,7 +67,7 @@ class avocetDevice(Device):
         self.voice_service.pause_n_resume()
     
     """
-    Generate and mp3 file and plays it
+    Generate an mp3 file and plays it
     """
     def speak(self, value):
         try:

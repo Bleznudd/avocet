@@ -5,4 +5,5 @@
     "vert":"#00ff00",
     "bleu":"#0000ff",
     "blanc":"#ffffff",
+    "indisponible":"not available",
 }

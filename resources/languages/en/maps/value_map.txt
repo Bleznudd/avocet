@@ -20,4 +20,5 @@
     "brown":"#663300",
     "light blue":"#00ffff",
     "purple":"#800080",
+    "not available":"not available",
 }

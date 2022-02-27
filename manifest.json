@@ -20,7 +20,7 @@
     "default": {
       "language": "eng",
       "wakeword": "avocet",
-      "pitch": "1"
+      "pitch": "1.00"
     },
     "schema": {
       "type": "object",
