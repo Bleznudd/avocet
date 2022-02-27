@@ -19,7 +19,8 @@
   "options": {
     "default": {
       "language": "eng",
-      "wakeword": "avocet"
+      "wakeword": "avocet",
+      "pitch": "1"
     },
     "schema": {
       "type": "object",
@@ -52,6 +53,17 @@
             "ok google",
             "alexa",
             "jarvis"
+          ]
+        },
+        "pitch": {
+          "description": "Select the voice pitch of the assistant",
+          "type": "string",
+          "enum": [
+            "0.90",
+            "0.95",
+            "1.00",
+            "1.05",
+            "1.10"
           ]
         }
       }

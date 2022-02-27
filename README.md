@@ -81,9 +81,9 @@ This adapter has been tested using the [Respeaker 2-MICs HAT](https://wiki.seeed
 
 The way the intent is processed and send through the components is meant to simplify the work of a satellite microphone/speaker.
 
-In fact the main-voice-assistant-device is the virtual one, represented by the Pi itself. For this virtual device to perform actions on to other devices, we need to update it's IntentProperty with a valid JSON. It will then process the intention to find the corresponding device and property, and will proceed to send a POST request to the gateway, to update the value.
+In fact the main-voice-assistant-device is the virtual one, represented by the Pi itself. For this virtual device to perform actions on to other devices, we need to update it's IntentProperty with a valid JSON. It will then process the intention to find the corresponding device and property, and will proceed to send a PUT request to the gateway, to update the value.
 
-To update the IntentProperty, we can use the same method that we use to update the properties of other things; yet again a POST to the gateway.
+To update the IntentProperty, we can use the same method that we use to update the properties of other things; yet again a PUT to the gateway.
 
 This means that the thread (or device) that listen for the audio input sends the intent to the gateway, asking to update the corresponding property, and when this changes, the virtual device is triggered to send another request, this time to update the final device.
 

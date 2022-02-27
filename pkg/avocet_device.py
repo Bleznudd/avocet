@@ -73,7 +73,10 @@ class avocetDevice(Device):
         try:
             response = gtts.gTTS(value, lang=self.adapter.language)
             response.save('response.mp3')
-            os.system("ffplay -nodisp -autoexit -volume 50 response.mp3 > /dev/null 2>&1")
+            rate = str(48000*0.5*float(self.adapter.pitch))
+            tempo = str(1.0/float(self.adapter.pitch))
+            cmd = "ffplay -nodisp -autoexit -volume 50 -af asetrate={0},atempo={1},aresample=48000 -i response.mp3 > /dev/null 2>&1".format(rate, tempo)
+            os.system(cmd)
         except gtts.tts.gTTSError:
             print("COULD NOT RETRIVE FEEDBACK SPEECH")
 

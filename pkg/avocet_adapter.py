@@ -28,6 +28,7 @@ class avocetAdapter(Adapter):
             self.language = config['language']
             self.wakeword = config['wakeword']
             self.access_key = config['access_key']
+            self.pitch = config['pitch']
             database.close()
 
         self.things = self.get_things()
