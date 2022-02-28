@@ -46,6 +46,9 @@ class avocetDevice(Device):
         self.alive = False
         self.switch()
 
+        os.system("rm /dev/shm/response.mp3 > /dev/null 2>&1")
+        os.system("touch /dev/shm/response.mp3")
+
     def is_on(self):
         return self.status
 
@@ -73,10 +76,10 @@ class avocetDevice(Device):
     def speak(self, value):
         try:
             response = gtts.gTTS(value, lang=self.adapter.language)
-            response.save('response.mp3')
+            response.save('/dev/shm/response.mp3')
             rate = str(48000*0.5*float(self.adapter.pitch))
             tempo = str(1.0/float(self.adapter.pitch))
-            cmd = "ffplay -nodisp -autoexit -volume 50 -af asetrate={0},atempo={1},aresample=48000 -i response.mp3 > /dev/null 2>&1".format(rate, tempo)
+            cmd = "ffplay -nodisp -autoexit -volume 50 -af asetrate={0},atempo={1},aresample=48000 -i /dev/shm/response.mp3 > /dev/null 2>&1".format(rate, tempo)
             os.system(cmd)
         except gtts.tts.gTTSError:
             print("COULD NOT RETRIVE FEEDBACK SPEECH")
