@@ -13,4 +13,5 @@
     " I could not find the ", #----------------- 9
     " I could not execute the ", #------------- 10
     " I don\'t know this intent type ", #------ 11
+    " I\'ve encountered an unexpected error " # 12
 ]

@@ -31,7 +31,7 @@
         "\"The dice stopped on \" + str(int((random()*5)+1))" 
     ],
     "specialTime":[
-        "\"It's \" + str(datetime.now().hour) + \" and \" + str(datetime.now().minute)" 
+        "\"It's \" + str(datetime.now().minute) + \" past \" + str(datetime.now().hour)" 
     ],
     "specialDay":[
         "\"Today it's the \" + str(datetime.now().day) + \"/\" + str(datetime.now().month) + \"/\" + str(datetime.now().year) " 

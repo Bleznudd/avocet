@@ -13,4 +13,5 @@
     " Je n'ai pas trouvé le ", #------------------- 9
     " Je n'ai pas pu exécuter le ", #------------- 10
     " Je ne connais pas ce type d'intention ", #-- 11
+    " J'ai rencontré une erreur inattendue ", #--- 12
 ]

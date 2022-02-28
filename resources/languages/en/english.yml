@@ -9,13 +9,26 @@ context:
       - (please) what's (the) ($Location:location) $Thing:thing $Property:property (please)
       - (please) how is (the) ($Location:location) $Thing:thing $Property:property (please)
       - (please)(can you) tell me (the) ($Location:location) $Thing:thing $Property:property (please)
-    getOnOffProperty:
+    getFirstProperty:
       - (please) how is (the) ($Location:location) $Thing:thing (please)
-      - is (the) ($Location:location) $Thing:thing [on, off, open, closed, locked, unlocked]
-      - have I left (the) ($Location:location) $Thing:thing [on, off, open, closed, locked, unlocked]
-      - has we left (the) ($Location:location) $Thing:thing [on, off, open, closed, locked, unlocked]
-      - has someone left (the) ($Location:location) $Thing:thing [on, off, open, closed, locked, unlocked]
+    getOnOffProperty:
+      - is (the) ($Location:location) $Thing:thing [on, off]
+      - have I left (the) ($Location:location) $Thing:thing [on, off]
+      - has we left (the) ($Location:location) $Thing:thing [on, off]
+      - has someone left (the) ($Location:location) $Thing:thing [on, off]
       - has (the) ($Location:location) $Thing:thing [started, stopped]
+    getOpenProperty:
+      - is (the) ($Location:location) $Thing:thing [open, closed]
+      - have I left (the) ($Location:location) $Thing:thing [open, closed]
+      - has we left (the) ($Location:location) $Thing:thing [open, closed]
+      - has someone left (the) ($Location:location) $Thing:thing [open, closed]
+    getLockedProperty:
+      - is (the) ($Location:location) $Thing:thing [locked, unlocked]
+      - have I left (the) ($Location:location) $Thing:thing [locked, unlocked]
+      - has we left (the) ($Location:location) $Thing:thing [locked, unlocked]
+      - has someone left (the) ($Location:location) $Thing:thing [locked, unlocked]
+    getPushedProperty:
+      - is (the) ($Location:location) $Thing:thing [pushed, pressed]
     setGeneralProperty:
       - (please) set (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percent) (please)
       - (please) make (the) $Property:property of (the) ($Location:location) $Thing:thing to [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percent) (please)
@@ -106,6 +119,8 @@ context:
       - stop
       - open
       - closed
+      - pushed
+      - not pushed
     ColorStatus:
       - red
       - green
@@ -161,6 +176,8 @@ context:
       - floor lamp
       - plug
       - tv
+      - television
+      - projector
       - lock
       - thermostat
       - thermometer
@@ -181,10 +198,10 @@ context:
       - energy sensor
       - energy monitor
       - smoke sensor
-      - co two sensor
-      - co sensor
-      - pm ten sensor
-      - pm two point five sensor
+      - carbon dioxide sensor
+      - carbon monoxide sensor
+      - particulate sensor
+      - fine particulate sensor
       - air quality sensor
       - air quality
       - leak sensor
@@ -202,6 +219,8 @@ context:
       - scene
       - scene manager
       - scene controller
+      - button
+      - push button
     Location:
       - inside
       - outside

@@ -25,7 +25,11 @@
         "motion":"MotionProperty",
         "smoke":"SmokeProperty",
     },
+    "getFirstProperty":"FirstProperty",
     "getOnOffProperty":"OnOffProperty",
+    "getOpenProperty":"OpenProperty",
+    "getLockedProperty":"LockedProperty",
+    "getPushedProperty":"PushedProperty",
     "setGeneralProperty":{
         "status":"OnOffProperty",
         "power":"OnOffProperty",

@@ -8,6 +8,7 @@ from datetime import datetime
 from ast import literal_eval
 from random import random
 from time import sleep
+import traceback
 import threading
 import gtts
 import json
@@ -84,61 +85,71 @@ class avocetDevice(Device):
     When an intention is received, this method parse it and execute the correct command
     """
     def action(self, intent: dict):
-        # print("RECEIVED INTENT IS: " + str(intent))
         if not(intent.get('is_understood')):
             return False
 
-        if 'thing' in intent.get('slots')[0]:
-            if 'location' in intent.get('slots')[0]:
-                target = self.adapter.get_href(intent.get('slots')[0].get('location') + " " + intent.get('slots')[0].get('thing'))
-            else:
-                target = self.adapter.get_href(intent.get('slots')[0].get('thing'))
-        else:
-            target = None
-
-        prop = (self.intent_to_property_map[intent.get('intent')] if not(isinstance(self.intent_to_property_map[intent.get('intent')], dict)) else self.intent_to_property_map[intent.get('intent')][intent.get('slots')[0].get('property')])
-        # print("= THING ============== " + str(target))
-        # print("= PROPE ============== " + str(prop))
-        if not(isinstance(target, type(None))):
-            if self.adapter.href_has_property(target, prop) or self.adapter.href_has_action(target, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else intent.get('slots')[0].get('to'))):
-                if intent.get('intent_type') == 0:
-                    val = next(iter(self.adapter.get_property(target, prop).values()))
-                    if isinstance(val, int) and not(isinstance(val, bool)):
-                        val = self.responses[2] + str(val)
-                    else:
-                        val = self.inv_value_map.get(val)
-                    self.speak(self.responses[0] + str(intent.get('slots')[0].get('thing')) + self.responses[1] + val)
-                elif intent.get('intent_type') == 1:
-                    done = self.adapter.set_property(target, prop, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else int(intent.get('slots')[0].get('to'))))
-                    if done:
-                        # "I've setted the thing to [val]"
-                        self.speak(self.responses[7] + str(intent.get('slots')[0].get('thing')) + self.responses[3] + str(intent.get('slots')[0].get('to')))
-                    else:
-                        # "I could not set the property"
-                        self.speak(self.responses[8] + self.responses[4])
-                elif intent.get('intent_type') == 2:
-                    done = self.adapter.exe_action(target, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else intent.get('slots')[0].get('to')))
-                    if done:
-                        # "I've setted the thing to [val]"
-                        self.speak(self.responses[7] + str(intent.get('slots')[0].get('thing')) + self.responses[3] + str(intent.get('slots')[0].get('to')))
-                    else:
-                        # "I've setted execute the action"
-                        self.speak(self.responses[10] + self.responses[6])
+        try:
+            if 'thing' in intent.get('slots')[0]:
+                if 'location' in intent.get('slots')[0]:
+                    target = self.adapter.get_href(intent.get('slots')[0].get('location') + " " + intent.get('slots')[0].get('thing'))
                 else:
-                    # "I don't know this intent type"
-                    self.speak(self.responses[11])
+                    target = self.adapter.get_href(intent.get('slots')[0].get('thing'))
             else:
-                # "I could not find the property"
-                self.speak(self.responses[9] + self.responses[4])
-        else:
-            if intent.get('intent_type') == 3:
-                self.switch()
-                self.speak(eval(self.special_map.get(intent.get('intent'))[int(random()*len(self.special_map.get(intent.get('intent'))))]))
-                self.switch()
+                target = None
+
+            prop = (self.intent_to_property_map[intent.get('intent')] if not(isinstance(self.intent_to_property_map[intent.get('intent')], dict)) else self.intent_to_property_map[intent.get('intent')][intent.get('slots')[0].get('property')])
+            if prop == 'FirstProperty' and not(isinstance(target, type(None))):
+                props = self.adapter.get_properties(target)
+                if 'OnOffProperty' in props:
+                    prop = 'OnOffProperty'
+                elif len(props) > 0:
+                    prop = props[0]
+
+            if not(isinstance(target, type(None))):
+                if self.adapter.href_has_property(target, prop) or self.adapter.href_has_action(target, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else intent.get('slots')[0].get('to'))):
+                    if intent.get('intent_type') == 0:
+                        val = next(iter(self.adapter.get_property(target, prop).values()))
+                        if isinstance(val, int) and not(isinstance(val, bool)):
+                            val = self.responses[2] + str(val)
+                        else:
+                            val = self.inv_value_map.get(val)
+                        self.speak(self.responses[0] + str(intent.get('slots')[0].get('thing')) + self.responses[1] + val)
+                    elif intent.get('intent_type') == 1:
+                        done = self.adapter.set_property(target, prop, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else int(intent.get('slots')[0].get('to'))))
+                        if done:
+                            # "I've setted the thing to [val]"
+                            self.speak(self.responses[7] + str(intent.get('slots')[0].get('thing')) + self.responses[3] + str(intent.get('slots')[0].get('to')))
+                        else:
+                            # "I could not set the property"
+                            self.speak(self.responses[8] + self.responses[4])
+                    elif intent.get('intent_type') == 2:
+                        done = self.adapter.exe_action(target, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else intent.get('slots')[0].get('to')))
+                        if done:
+                            # "I've setted the thing to [val]"
+                            self.speak(self.responses[7] + str(intent.get('slots')[0].get('thing')) + self.responses[3] + str(intent.get('slots')[0].get('to')))
+                        else:
+                            # "I've setted execute the action"
+                            self.speak(self.responses[10] + self.responses[6])
+                    else:
+                        # "I don't know this intent type"
+                        self.speak(self.responses[11])
+                else:
+                    # "I could not find the property"
+                    self.speak(self.responses[9] + self.responses[4])
             else:
-                # "I could not find the device"
-                self.speak(self.responses[9] + self.responses[5])
-        return True
+                if intent.get('intent_type') == 3:
+                    self.switch()
+                    self.speak(eval(self.special_map.get(intent.get('intent'))[int(random()*len(self.special_map.get(intent.get('intent'))))]))
+                    self.switch()
+                else:
+                    # "I could not find the device"
+                    self.speak(self.responses[9] + self.responses[5])
+            return True
+        except Exception as e:
+            print(traceback.format_exc())
+            # "I've encountered an unexpected error"
+            self.speak(self.responses[12])
+            return False
         
 class VoiceThread(threading.Thread):
     def __init__(
@@ -149,7 +160,7 @@ class VoiceThread(threading.Thread):
             rhino_model_path,
             access_key,
             set_function,
-            porcupine_sensitivity=0.65,
+            porcupine_sensitivity=0.75,
             rhino_sensitivity=0.25):
         super(VoiceThread, self).__init__()
 
