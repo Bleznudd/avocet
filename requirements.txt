@@ -2,3 +2,4 @@ requests>=2.26.0
 picovoice>=2.1.0
 pvrecorder>=1.0.2
 gtts>=2.2.3
+spidev>=3.5

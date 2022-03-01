@@ -16,6 +16,7 @@ import time
 import os
 
 from .avocet_property import avocetSwitchProperty, avocetIntentProperty
+# from .led import Led
 
 _POLL_INTERVAL = 3
 
@@ -44,10 +45,13 @@ class avocetDevice(Device):
         self.value_map = literal_eval(open(os.path.join(os.path.dirname(__file__), "../resources/languages/" + self.adapter.language + "/maps/value_map.txt"), "r").read())
         self.inv_value_map = {v: k for k, v in self.value_map.items()}
         self.alive = False
+        self.hat = os.path.isdir('/proc/device-tree/wm8960_mclk') # True is respeaker drivers are installed
         self.switch()
 
         os.system("rm /dev/shm/response.mp3 > /dev/null 2>&1")
         os.system("touch /dev/shm/response.mp3")
+
+        # self.led = (Led() if self.hat else False)
 
     def is_on(self):
         return self.status
@@ -75,12 +79,16 @@ class avocetDevice(Device):
     """
     def speak(self, value):
         try:
+            # if self.hat:
+            #     self.led.wake()
             response = gtts.gTTS(value, lang=self.adapter.language)
             response.save('/dev/shm/response.mp3')
             rate = str(48000*0.5*float(self.adapter.pitch))
             tempo = str(1.0/float(self.adapter.pitch))
             cmd = "ffplay -nodisp -autoexit -volume 50 -af asetrate={0},atempo={1},aresample=48000 -i /dev/shm/response.mp3 > /dev/null 2>&1".format(rate, tempo)
             os.system(cmd)
+            # if self.hat:
+            #     self.led.sleep()
         except gtts.tts.gTTSError:
             print("COULD NOT RETRIVE FEEDBACK SPEECH")
 
