@@ -57,3 +57,26 @@ class avocetIntentProperty(avocetProperty):
 
     def intent_changed(self, value):
         self.device.action(json.loads(value))
+
+class avocetVolumeProperty(avocetProperty):
+
+    def set_value(self, value):
+        if self.name != 'volume':
+            return
+
+        self.set_state(value)
+        self.set_cached_value(value)
+        self.device.notify_property_changed(self)
+        self.intent_changed(value)
+
+    def update(self):
+        if self.name != 'volume':
+            return
+
+        value = self.device.get_volume()
+        if value != self.value:
+            self.set_cached_value(value)
+            self.device.notify_property_changed(self)
+
+    def intent_changed(self, value):
+        self.device.adjust(value)

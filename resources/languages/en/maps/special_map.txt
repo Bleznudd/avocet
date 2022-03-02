@@ -7,10 +7,10 @@
 #
 {
     "specialSelfName":[
-        "\"I'm \" + self.adapter.wakeword + \", your personal home assistant\"",
+        "\"I'm \" + self.adapter.wakeword.replace('hey', '').replace('ok', '') + \", your personal home assistant\"",
         "\"You can call me however you like, just remember to change the settings\"",
-        "\"I'm \" + self.adapter.wakeword + \", nice to meet you\"",
-        "\"You asked for a home assistant and here I am. I'm \" + self.adapter.wakeword ",
+        "\"I'm \" + self.adapter.wakeword.replace('hey', '').replace('ok', '') + \", nice to meet you\"",
+        "\"You asked for a home assistant and here I am. I'm \" + self.adapter.wakeword.replace('hey', '').replace('ok', '') ",
     ],
     "specialTellJoke":[
         "\"What's the best thing about Switzerland? I don't know, but the flag is a big plus\"",

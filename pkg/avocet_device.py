@@ -15,7 +15,7 @@ import json
 import time
 import os
 
-from .avocet_property import avocetSwitchProperty, avocetIntentProperty
+from .avocet_property import avocetSwitchProperty, avocetIntentProperty, avocetVolumeProperty
 # from .led import Led
 
 _POLL_INTERVAL = 3
@@ -30,6 +30,7 @@ class avocetDevice(Device):
         self.href = "/things/" + _id
         self.status = False
         self.intent = ""
+        self.volume = 50 #%
         self.voice_service = VoiceThread(
             # Wakewords are set to be always the ones with english accent
             os.path.join(os.path.dirname(__file__), '../resources/languages/en/wake/' + self.adapter.wakeword + '_raspberry-pi.ppn'),
@@ -59,6 +60,9 @@ class avocetDevice(Device):
     def get_intent(self):
         return self.intent
 
+    def get_volume(self):
+        return self.volume
+
     def set_intent(self, value):
         self.adapter.set_property(self.href, 'IntentProperty', json.dumps(value))
 
@@ -73,6 +77,12 @@ class avocetDevice(Device):
 
         # print("SWITCHING STATUS")
         self.voice_service.pause_n_resume()
+
+    """
+    Adjust the volume of the speech
+    """
+    def adjust(self, value):
+        self.volume = value
     
     """
     Generate an mp3 file and plays it
@@ -85,7 +95,7 @@ class avocetDevice(Device):
             response.save('/dev/shm/response.mp3')
             rate = str(48000*0.5*float(self.adapter.pitch))
             tempo = str(1.0/float(self.adapter.pitch))
-            cmd = "ffplay -nodisp -autoexit -volume 50 -af asetrate={0},atempo={1},aresample=48000 -i /dev/shm/response.mp3 > /dev/null 2>&1".format(rate, tempo)
+            cmd = "ffplay -nodisp -autoexit -volume {0} -af asetrate={1},atempo={2},aresample=48000 -i /dev/shm/response.mp3 > /dev/null 2>&1".format(str(self.volume), rate, tempo)
             os.system(cmd)
             # if self.hat:
             #     self.led.sleep()
@@ -273,7 +283,7 @@ class avocetSwitch(avocetDevice):
     def __init__(self, adapter, _id, name):
         avocetDevice.__init__(self, adapter, _id, name)
         self._type.extend(['OnOffSwitch'])
-
+        
         self.properties['on'] = avocetSwitchProperty(
             self,
             'on',
@@ -295,6 +305,19 @@ class avocetSwitch(avocetDevice):
                 'visible': False,
             },
             self.get_intent(),
+        )
+
+        self.properties['volume'] = avocetVolumeProperty(
+            self,
+            'volume',
+            {
+                '@type': 'LevelProperty',
+                'title': 'Volume',
+                'type': 'integer',
+                'minimum': 0,
+                'maximum': 100
+            },
+            self.get_volume()
         )
 
 """
