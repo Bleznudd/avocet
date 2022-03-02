@@ -320,6 +320,39 @@ class avocetSwitch(avocetDevice):
             self.get_volume()
         )
 
+        self.actions['test'] = {
+            'title': 'New Intent',
+            'description': 'Send a new intent',
+            'input': {
+                'type': 'object',
+                'required': [
+                    'intent',
+                ],
+                'properties': {
+                    'intent': {
+                        'type': 'string',
+                    },
+                    'thing': {
+                        'type': 'string',
+                    },
+                    'location': {
+                        'type': 'string',
+                    },
+                    'property': {
+                        'type': 'string',
+                    },
+                    'to': {
+                        'type': 'string',
+                    },
+                },
+            }
+        }
+
+    def perform_action(self, action):
+        print("THIS WILL REPLACE THE INTENTPROPERTY WITH AN INTENTACTION")
+        print(str(action.input))
+        print("")
+
 """
 EXAMPLE OF VALID JSON FOR SETTING THE INTENT PROPERTY
 
