@@ -1,6 +1,6 @@
 """avocet device"""
 
-from gateway_addon import Device
+from gateway_addon import Device, Action
 # from webthing import Value
 from picovoice import Picovoice
 from pvrecorder import PvRecorder
@@ -15,7 +15,7 @@ import json
 import time
 import os
 
-from .avocet_property import avocetSwitchProperty, avocetIntentProperty, avocetVolumeProperty
+from .avocet_property import avocetSwitchProperty, avocetVolumeProperty
 # from .led import Led
 
 _POLL_INTERVAL = 3
@@ -64,7 +64,7 @@ class avocetDevice(Device):
         return self.volume
 
     def set_intent(self, value):
-        self.adapter.set_property(self.href, 'IntentProperty', json.dumps(value))
+        self.adapter.exe_action(self.href, 'new-intent', value)
 
     """
     Starts and stops the wakeword listener
@@ -144,7 +144,8 @@ class avocetDevice(Device):
                             # "I could not set the property"
                             self.speak(self.responses[8] + self.responses[4])
                     elif intent.get('intent_type') == 2:
-                        done = self.adapter.exe_action(target, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else intent.get('slots')[0].get('to')))
+                        # TODO: ad a value parameter, only empty input actions are currently supported
+                        done = self.adapter.exe_action(target, (self.value_map.get(intent.get('slots')[0].get('to')) if not(isinstance(self.value_map.get(intent.get('slots')[0].get('to')), type(None))) else intent.get('slots')[0].get('to')), {})
                         if done:
                             # "I've setted the thing to [val]"
                             self.speak(self.responses[7] + str(intent.get('slots')[0].get('thing')) + self.responses[3] + str(intent.get('slots')[0].get('to')))
@@ -228,16 +229,9 @@ class VoiceThread(threading.Thread):
             for slot, value in inference.slots.items():
                 response.get('slots')[0][slot] = value
             for slot in response.get('slots'):
-                if 'status' in slot:
-                    slot['to'] = slot.pop('status')
-                if 'color' in slot:
-                    slot['to'] = slot.pop('color')
-                if 'value' in slot:
-                    slot['to'] = slot.pop('value')
-                if 'heat' in slot:
-                    slot['to'] = slot.pop('heat')
-                if 'action' in slot:
-                    slot['to'] = slot.pop('action')
+                for i in ['status', 'color', 'value', 'heat', 'action']:
+                    if i in slot:
+                        slot['to'] = slot.pop(i)
         else:
             response = {
                 "is_understood" : inference.is_understood,
@@ -295,18 +289,6 @@ class avocetSwitch(avocetDevice):
             self.is_on()
         )
 
-        self.properties['intent'] = avocetIntentProperty(
-            self,
-            'intent',
-            {
-                '@type': 'IntentProperty',
-                'title': 'Last Intent',
-                'type': 'string',
-                'visible': False,
-            },
-            self.get_intent(),
-        )
-
         self.properties['volume'] = avocetVolumeProperty(
             self,
             'volume',
@@ -320,7 +302,7 @@ class avocetSwitch(avocetDevice):
             self.get_volume()
         )
 
-        self.actions['test'] = {
+        self.actions['new-intent'] = {
             'title': 'New Intent',
             'description': 'Send a new intent',
             'input': {
@@ -348,10 +330,29 @@ class avocetSwitch(avocetDevice):
             }
         }
 
+    def request_action(self, action_id, action_name, action_input):
+        if action_name not in self.actions:
+            return
+
+        metadata = self.actions[action_name]
+        action = Action(action_id, self, action_name, action_input)
+        self.perform_action(action)
+
     def perform_action(self, action):
-        print("THIS WILL REPLACE THE INTENTPROPERTY WITH AN INTENTACTION")
-        print(str(action.input))
-        print("")
+        if str(action.name) == 'new-intent':
+            if 'slots' in action.input:
+                # The intention comes from avocet voice thread
+                pass
+            else:
+                # The intention comes from the webthings UI
+                action.input['is_understood'] = True
+                action.input['intent_type'] = (0 if action.input['intent'][:3] == "get" else (1 if action.input['intent'][:3] == "set" else (2 if action.input['intent'][:3] == "exe" else 3))) # get = 0, set = 1, action = 2, special = 3
+                action.input['slots'] = []
+                action.input['slots'].append({})
+                for i in ['property', 'thing', 'location', 'to']:
+                    if i in action.input:
+                        action.input['slots'][0][i] = action.input.pop(i)
+            self.action(action.input)
 
 """
 EXAMPLE OF VALID JSON FOR SETTING THE INTENT PROPERTY

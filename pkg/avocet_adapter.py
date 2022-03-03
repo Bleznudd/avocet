@@ -115,8 +115,7 @@ class avocetAdapter(Adapter):
             return self.api_put(href + '/properties/' + propname, {propname:value})
         return False
 
-    # TODO: ad a value parameter, only empty input actions are currently supported
-    def exe_action(self, href: str, action: str):
+    def exe_action(self, href: str, action: str, value: dict):
         # print("yes you are calling me")
         # print("with these values: ", href, action, value)
         # print("and I got: ", str(self.api_get(href).get('actions')))
@@ -127,7 +126,7 @@ class avocetAdapter(Adapter):
                 actname = act
                 break
         if actname:
-            return self.api_post(href + '/actions/' + actname, {actname:{'input':{}}})
+            return self.api_post(href + '/actions/' + actname, {actname:{'input':value}})
         return False
 
     # LOW LEVEL INTERACTION METHODS

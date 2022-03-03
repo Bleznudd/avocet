@@ -81,11 +81,9 @@ This adapter has been tested using the [Respeaker 2-MICs HAT](https://wiki.seeed
 
 The way the intent is processed and send through the components is meant to simplify the work of a satellite microphone/speaker.
 
-In fact the main-voice-assistant-device is the virtual one, represented by the Pi itself. For this virtual device to perform actions on to other devices, we need to update it's IntentProperty with a valid JSON. It will then process the intention to find the corresponding device and property, and will proceed to send a PUT request to the gateway, to update the value.
+In fact the `main-voice-assistant-device` is the virtual one, represented by the Pi itself. For this virtual device to perform actions on to other devices, we need to send a POST request for a `new-intent` action with a valid JSON. The intention is then processed to find the corresponding device and property, and a PUT request is sent, to update the final value.
 
-To update the IntentProperty, we can use the same method that we use to update the properties of other things; yet again a PUT to the gateway.
-
-This means that the thread (or device) that listen for the audio input sends the intent to the gateway, asking to update the corresponding property, and when this changes, the virtual device is triggered to send another request, this time to update the final device.
+In other words that the thread (or device) that listen for the audio input sends the intent to the gateway, asking to perform an action on the virtual device, and this triggers it to send another request (again on the gateway), this time to update the final device.
 
 A Satellite should thus implement the voice to intent mechanism, and be able to send it through HTTP, while the remaining work will still be done by the Pi.
 
@@ -96,7 +94,7 @@ sequenceDiagram
     note left of Person: Speaking at the Pi
     Person-->>Adapter/Device: Audio input
     Adapter/Device-->>Person: Audio feedback
-    Adapter/Device->>Gateway: PUT new intent
+    Adapter/Device->>Gateway: POST new intent
     Gateway->>Adapter/Device: Updating the intent
     Adapter/Device->>Gateway: PUT new lamp property
     Gateway->>Lamp: Updating the property
@@ -105,7 +103,7 @@ sequenceDiagram
     note right of Satellite: Speaking at a Satellite
     Person-->>Satellite: Audio input
     Satellite-->>Person: Audio feedback
-    Satellite->>Gateway: PUT new intent
+    Satellite->>Gateway: POST new intent
     Gateway->>Adapter/Device: Updating the intent
     Adapter/Device->>Gateway: PUT new lamp property
     Gateway->>Lamp: Updating the property
