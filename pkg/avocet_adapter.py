@@ -21,13 +21,10 @@ class avocetAdapter(Adapter):
         database = Database(self.package_name)
         if database.open():
             config = database.load_config()
-            if 'token' in config and len(config['token']) > 0:
-                self.token = config['token']
-            else:
-                self.token='eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjJhOTQ2MjMzLWVjNzUtNGM3OS05NzdkLWFhOGU3YmMwNzY2NyJ9.eyJjbGllbnRfaWQiOiJsb2NhbC10b2tlbiIsInJvbGUiOiJhY2Nlc3NfdG9rZW4iLCJzY29wZSI6Ii90aGluZ3M6cmVhZHdyaXRlIiwiaWF0IjoxNjQzMzY0Mjk5LCJpc3MiOiJOb3Qgc2V0LiJ9.5mvh7KLCF6TPgC075LtfwaSV7C3tpxpiiRLZtSR40eG9DwfCbr8QunJJ8Q9QLTfM6bHiQfBOXy8AtNKwVTIeDw'
+            self.token = config['token']
             self.language = config['language']
-            self.wakeword = config['wakeword']
             self.access_key = config['access_key']
+            self.wakeword = config['wakeword']
             self.pitch = config['pitch']
             database.close()
 
@@ -137,9 +134,11 @@ class avocetAdapter(Adapter):
             r = requests.get(self.api_server + api_path, headers={
                         'Accept': 'application/json',
                         'Authorization': 'Bearer ' + str(self.token),
-                    }, verify=False, timeout=3)
+                    }, 
+                    verify=False, 
+                    timeout=0.5
+            )
             return json.loads(r.text)
-            
         except Exception as ex:
             print("Error in http GET, returned json: " + str(ex))
             return {"error": "not available"}
@@ -155,11 +154,9 @@ class avocetAdapter(Adapter):
                     },
                     data=json.dumps(json_dict),
                     verify=False,
-                    timeout=5
+                    timeout=0.5
             )
-            # return_value['succes'] = True
             return (True if r.status_code == 200 else False)
-
         except Exception as ex:
             print("Error in http PUT, returned json: " + str(ex))
             return {"error": 500}
@@ -175,11 +172,12 @@ class avocetAdapter(Adapter):
                     },
                     data=json.dumps(json_dict),
                     verify=False,
-                    timeout=5
+                    timeout=0.25
             )
-            # return_value['succes'] = True
-            return (True if r.status_code == 201 else False)
-
+            # return (True if r.status_code == 201 else False)
+            return True
+        except requests.exceptions.ReadTimeout: 
+            return True
         except Exception as ex:
             print("Error in http POST, returned json: " + str(ex))
             return {"error": 500}

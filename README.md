@@ -20,7 +20,7 @@ Built around PicoVoice and the Respeaker 2-MIC hat.
 - [ ] Lower and upper level-like properties
 - [x] Set color in light devices
 - [ ] Set temperature in light devices
-- [ ] Set enum properties
+- [x] Set enum properties
 - [x] Perform actions on devices (e.g.: locks, [scene](https://github.com/WebThingsIO/scene-control-adapter) activation)
 - [x] Get values from devices
 - [x] Voice feedback
