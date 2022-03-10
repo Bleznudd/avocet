@@ -354,14 +354,11 @@ class avocetSwitch(avocetDevice):
 
     def perform_action(self, action):
         if str(action.name) == 'new-intent':
-            if 'slots' in action.input:
+            if not(isinstance(action.input.get('is_understood'), type(None))):
                 # The intention comes from avocet voice thread
-                print("WE GOT SLOTS")
                 pass
             else:
                 # The intention comes from the webthings UI
-                print("NO SLOTS IN HERE")
-                print(str(action.input))
                 action.input['is_understood'] = True
                 action.input['intent_type'] = (0 if action.input['intent'][:3] == "get" else (1 if action.input['intent'][:3] == "set" else (2 if action.input['intent'][:3] == "exe" else 3))) # get = 0, set = 1, action = 2, special = 3
                 action.input['slots'] = []
