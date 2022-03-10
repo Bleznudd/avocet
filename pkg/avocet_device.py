@@ -51,6 +51,7 @@ class avocetDevice(Device):
 
         os.system("rm /dev/shm/response.mp3 > /dev/null 2>&1")
         os.system("touch /dev/shm/response.mp3")
+        self.save('I could not retrieve the feedback speech', '/dev/shm/backup.mp3')
 
         # self.led = (Led() if self.hat else False)
 
@@ -83,24 +84,37 @@ class avocetDevice(Device):
     """
     def adjust(self, value):
         self.volume = value
+
+    """
+    Generate and save an mp3 file
+    """
+    def save(self, value, path):
+        try:
+            response = gtts.gTTS(value, lang=self.adapter.language)
+            response.save(path)
+            return True
+        except gtts.tts.gTTSError:
+            print("COULD NOT RETRIEVE FEEDBACK SPEECH")
+            return False
     
     """
-    Generate an mp3 file and plays it
+    Play an mp3 file
     """
     def speak(self, value):
-        try:
-            # if self.hat:
-            #     self.led.wake()
-            response = gtts.gTTS(value, lang=self.adapter.language)
-            response.save('/dev/shm/response.mp3')
-            rate = str(48000*0.5*float(self.adapter.pitch))
-            tempo = str(1.0/float(self.adapter.pitch))
+        rate = str(48000*0.5*float(self.adapter.pitch))
+        tempo = str(1.0/float(self.adapter.pitch))
+        # if self.hat:
+        #     self.led.wake()
+        if self.save(value, '/dev/shm/response.mp3'):
             cmd = "ffplay -nodisp -autoexit -volume {0} -af asetrate={1},atempo={2},aresample=48000 -i /dev/shm/response.mp3 > /dev/null 2>&1".format(str(self.volume), rate, tempo)
             os.system(cmd)
-            # if self.hat:
-            #     self.led.sleep()
-        except gtts.tts.gTTSError:
-            print("COULD NOT RETRIVE FEEDBACK SPEECH")
+        elif os.path.isfile('/dev/shm/backup.mp3'):
+            cmd = "ffplay -nodisp -autoexit -volume {0} -af asetrate={1},atempo={2},aresample=48000 -i /dev/shm/backup.mp3 > /dev/null 2>&1".format(str(self.volume), rate, tempo)
+            os.system(cmd)
+        else:
+            print("NO BACKUP AUDIO FOUND")
+        # if self.hat:
+        #     self.led.sleep()
 
     """
     When an intention is received, this method parse it and execute the correct command
@@ -342,9 +356,12 @@ class avocetSwitch(avocetDevice):
         if str(action.name) == 'new-intent':
             if 'slots' in action.input:
                 # The intention comes from avocet voice thread
+                print("WE GOT SLOTS")
                 pass
             else:
                 # The intention comes from the webthings UI
+                print("NO SLOTS IN HERE")
+                print(str(action.input))
                 action.input['is_understood'] = True
                 action.input['intent_type'] = (0 if action.input['intent'][:3] == "get" else (1 if action.input['intent'][:3] == "set" else (2 if action.input['intent'][:3] == "exe" else 3))) # get = 0, set = 1, action = 2, special = 3
                 action.input['slots'] = []
