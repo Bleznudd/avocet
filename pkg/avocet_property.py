@@ -27,13 +27,13 @@ class avocetSwitchProperty(avocetProperty):
         if self.name != 'on':
             return
 
-        value = self.device.is_on()
+        value = self.device.get_status()
         if value != self.value:
             self.set_cached_value(value)
             self.device.notify_property_changed(self)
 
     def switch_changed(self):
-        self.device.switch()
+        self.device.set_status()
 
 class avocetVolumeProperty(avocetProperty):
 
@@ -56,4 +56,4 @@ class avocetVolumeProperty(avocetProperty):
             self.device.notify_property_changed(self)
 
     def volume_changed(self, value):
-        self.device.adjust(value)
+        self.device.set_volume(value)

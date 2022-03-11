@@ -47,30 +47,23 @@ class avocetDevice(Device):
         self.inv_value_map = {v: k for k, v in self.value_map.items()}
         self.alive = False
         self.hat = os.path.isdir('/proc/device-tree/wm8960_mclk') # True is respeaker drivers are installed
-        self.switch()
+        self.set_status()
 
         os.system("rm /dev/shm/response.mp3 > /dev/null 2>&1")
-        os.system("touch /dev/shm/response.mp3")
-        self.save('I could not retrieve the feedback speech', '/dev/shm/backup.mp3')
+        self.save(self.responses[13], '/dev/shm/backup.mp3')
 
         # self.led = (Led() if self.hat else False)
 
-    def is_on(self):
+    def get_status(self):
         return self.status
-
-    def get_intent(self):
-        return self.intent
 
     def get_volume(self):
         return self.volume
 
-    def set_intent(self, value):
-        self.adapter.exe_action(self.href, 'new-intent', value)
-
     """
     Starts and stops the wakeword listener
     """
-    def switch(self):
+    def set_status(self):
         if not(self.alive):
             # print("STARTING HERE")
             self.voice_service.start()
@@ -82,8 +75,14 @@ class avocetDevice(Device):
     """
     Adjust the volume of the speech
     """
-    def adjust(self, value):
+    def set_volume(self, value):
         self.volume = value
+
+    """
+    Send the action/intent request
+    """
+    def set_intent(self, value):
+        self.adapter.exe_action(self.href, 'new-intent', value)
 
     """
     Generate and save an mp3 file
@@ -174,9 +173,9 @@ class avocetDevice(Device):
                     self.speak(self.responses[9] + self.responses[4])
             else:
                 if intent.get('intent_type') == 3:
-                    self.switch()
+                    self.set_status()
                     self.speak(eval(self.special_map.get(intent.get('intent'))[int(random()*len(self.special_map.get(intent.get('intent'))))]))
-                    self.switch()
+                    self.set_status()
                 else:
                     # "I could not find the device"
                     self.speak(self.responses[9] + self.responses[5])
@@ -300,7 +299,7 @@ class avocetSwitch(avocetDevice):
                 'title': 'On/Off',
                 'type': 'boolean',
             },
-            self.is_on()
+            self.get_status()
         )
 
         self.properties['volume'] = avocetVolumeProperty(
