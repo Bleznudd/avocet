@@ -1,0 +1,32 @@
+# This is actually not a map, but a collection of responses to randomly choose from 
+# when a specific special intent is received
+#
+# needs:
+# from datetime import datetime
+# from random import random
+#
+{
+    "specialSelfName":[
+        "\"Sono \" + self.adapter.wakeword.replace('hey', '').replace('ok', '') + \", il tuo assistente personale\"",
+        "\"Puoi chiamarmi come preferisci, ma ricordati di cambiare le impostazioni\"",
+        "\"Sono \" + self.adapter.wakeword.replace('hey', '').replace('ok', '') + \", piacere di conoscerti\"",
+        "\"Hai chiesto di avere un assistente personale ed eccomi qua. Sono \" + self.adapter.wakeword.replace('hey', '').replace('ok', '') ",
+    ],
+    "specialTellJoke":[
+        "\"Qual è la nazione preferita dalle galline? Il Portogallo\"",
+        "\"Il marinaio spiegò le vele al vento, ma il vento non capì\"",
+        "\"Che vitaccia - esclamò l'operaio - ci vorrebbe un cacciavite più grosso\""
+    ],
+    "specialFlipCoin":[
+        "\"La moneta mostra \" + (\"testa\" if random() < 0.5 else \"croce\")" 
+    ],
+    "specialRollDice":[
+        "\"Il dado si è fermato su \" + str(int((random()*5)+1))" 
+    ],
+    "specialTime":[
+        "\"Sono le \" + str(datetime.now().hour) + \" e \" + str(datetime.now().minute)" 
+    ],
+    "specialDay":[
+        "\"Oggi è il \" + str(datetime.now().day) + \"/\" + str(datetime.now().month) + \"/\" + str(datetime.now().year) " 
+    ],
+}

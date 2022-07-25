@@ -1,0 +1,211 @@
+context:
+  expressions:
+    getGeneralProperty:
+      - (per favore)(puoi)(dirmi) quanto vale [il, lo, la] $Property:property [del, della] $Thing:thing (in)(della) ($Location:location)
+      - (per favore)(puoi)(dirmi) qual è [il, lo, la] $Property:property [del, della] $Thing:thing (in)(della) ($Location:location)
+      - (per favore)(puoi)(dirmi) come è [il, lo, la] $Property:property [del, della] $Thing:thing (in)(della) ($Location:location)
+    getFirstProperty:
+      - (per favore)(puoi)(dirmi) come è [il, lo, la] $Thing:thing (in)(della) ($Location:location)
+    getOnOffProperty:
+      - è (stato)(stata) [acceso, spento] [il, lo, la] $Thing:thing 
+      - è (stato)(stata) [accesa, spenta] [il, lo, la] $Thing:thing 
+      - ho lasciato [il, lo, la] $Thing:thing è [acceso, spento]
+      - ho lasciato [il, lo, la] $Thing:thing è [accesa, spenta]
+    getOpenProperty:
+      - è (stato)(stata) [aperto, chiuso] [il, lo, la] $Thing:thing 
+      - è (stato)(stata) [aperta, chiusa] [il, lo, la] $Thing:thing 
+      - ho lasciato [il, lo, la] $Thing:thing è [aperto, chiuso]
+      - ho lasciato [il, lo, la] $Thing:thing è [aperta, chiusa]
+    getLockedProperty:
+      - è (stato)(stata) chiuso a chiave [il, lo, la] $Thing:thing 
+      - è (stato)(stata) chiusa a chiave [il, lo, la] $Thing:thing 
+      - ho lasciato [il, lo, la] $Thing:thing è [bloccato, sbloccato]
+      - ho lasciato [il, lo, la] $Thing:thing è [bloccata, sbloccata]
+      - ho lasciato [il, lo, la] $Thing:thing è chiuso a chiave
+      - ho lasciato [il, lo, la] $Thing:thing è chiusa a chiave
+      - ho chiuso a chiave [il, lo, la] $Thing:thing 
+    getPushedProperty:
+      - è (stato) [premuto, schiacciato] [il, lo, la] $Thing:thing 
+    setGeneralProperty:
+      - (per favore) imposta [il, lo, la] $Property:property [del, della] $Thing:thing [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
+      - (per favore) cambia [il, lo, la] $Property:property [del, della] $Thing:thing [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
+      - (per favore) sposta [il, lo, la] $Property:property [del, della] $Thing:thing [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
+      - (per favore) alza [il, lo, la] $Property:property [del, della] $Thing:thing [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
+      - (per favore) abbassa [il, lo, la] $Property:property [del, della] $Thing:thing [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
+    setOnOffProperty:
+      - (per favore) imposta [il, lo, la] $Thing:thing (in) ($Location:location) [a, su] $OnOffStatus:status (per favore)
+    setColorProperty:
+      - (per favore) imposta [il, lo, la] $Thing:thing (in) ($Location:location) [a, su] $ColorStatus:color (per favore)
+      - (per favore) imposta [a, su] $ColorStatus:color [il, lo, la] $Thing:thing (in) ($Location:location) (per favore)
+      - (per favore) cambia [il, lo, la] $Thing:thing (in) ($Location:location) [a, su] $ColorStatus:color (per favore)
+    setLevelProperty:
+      - (per favore) imposta [il, lo, la] $Thing:thing (in) ($Location:location) [a, su] [$pv.TwoDigitInteger:value] (percento) (per favore)
+      - (per favore) imposta [a, su] [$pv.TwoDigitInteger:value] (percento) [il, lo, la] $Thing:thing (in) ($Location:location) (per favore)
+      - (per favore) alza (il volume) [del, della] $Thing:thing (in) ($Location:location) [a, su] [$pv.TwoDigitInteger:value] (percento) (per favore)
+      - (per favore) abbassa (il volume) [del, della] $Thing:thing (in) ($Location:location) [a, su] [$pv.TwoDigitInteger:value] (percento) (per favore)
+    exeAction:
+      - (per favore) imposta [il, lo, la] $Thing:thing (in) ($Location:location) [a, su] $Action:action (per favore)
+    specialSelfName:
+      - qual è il tuo nome
+      - come ti chiami
+      - chi sei
+    specialTellJoke:
+      - (per favore) [dimmi, raccontami] una barzelletta (per favore)
+      - (per favore) fammi ridere (per favore)
+      - (per favore) tirami su il morale (per favore)
+    specialFlipCoin:
+      - (per favore) lancia [una, la] moneta (per favore)
+      - (per favore) [fai, gioca] (a) testa o croce (per favore)
+    specialRollDice:
+      - (per favore) lancia [un, il] dado (per favore)
+    specialTime:
+      - (puoi) (per favore) (dirmi) che ore sono (per favore)
+    specialDay:
+      - che giorno è (oggi)
+      - qual è la data (di) (oggi)
+      - che giorno della settimana è (oggi)
+    test:
+      - fai un test
+  slots:
+    OnOffStatus:
+      - on
+      - off
+      - acceso
+      - spento
+      - aperto
+      - chiuso
+      - premuto
+      - non premuto
+    ColorStatus:
+      - rosso
+      - verde
+      - blu
+      - bianco
+      - rosa
+      - giallo
+      - arancione
+      - marrone
+      - azzurro
+      - viola
+    HeatStatus:
+      - riscalda
+      - rinfresca
+      - auto
+    Property:
+      - stato
+      - potenza
+      - livello
+      - colore
+      - modalità colore
+      - temperatura colore
+      - volume
+      - luminosità
+      - temperatura
+      - temperatura target
+      - modalità
+      - umidità
+      - pressione
+      - voltaggio
+      - corrente
+      - frequenza
+      - densità
+      - concentrazione
+      - particolato
+      - perdita
+      - movimento
+      - moto
+      - fumo
+    Thing:
+      - radio
+      - musica
+      - porta
+      - finestra
+      - luce
+      - lampada
+      - lampadine
+      - lampadario
+      - led
+      - striscia led
+      - candelabro
+      - piantana
+      - presa
+      - tv
+      - televisione
+      - proiettore
+      - lucchetto
+      - serratura
+      - termostato
+      - termometro
+      - valvola
+      - altoparlante
+      - stereo
+      - microfono
+      - assistente vocale
+      - frigo
+      - frigorifero
+      - ventilatore
+      - videocamera
+      - telecamera
+      - barometro
+      - sensore di pressione
+      - sensore di movimento
+      - sensore di luminosità
+      - sensore di temperatura
+      - sensore di umidità
+      - contatore di energia
+      - sensore di fumi
+      - sensore di monossido di carbonio
+      - sensore di diossido di carbonio
+      - sensore di particolato
+      - sensore di polveri sottili
+      - sensore di qualità dell'aria
+      - qualità dell'aria
+      - sensore di perdite
+      - colorimetro
+      - sensore per porte
+      - sensore per finestre
+      - aspirapolvere
+      - robot aspirapolvere
+      - lavastoviglie
+      - lavatrice
+      - tende
+      - scene
+      - monitor delle scene
+      - bottone
+      - bottone a pressione
+    Location:
+      - dentro
+      - fuori
+      - corridoio
+      - camera da letto
+      - letto
+      - cucina
+      - bagno
+      - doccia
+      - garage
+      - rimessa
+      - autorimessa
+      - giardino
+      - sala da pranzo
+      - entrata
+      - scale
+      - tetto
+      - solaio
+      - salotto
+      - divano
+      - ufficio
+      - scrivania
+      - portico
+      - davanti
+      - dietro
+    Action:
+      - giorno
+      - mattina
+      - sera
+      - notte
+      - blocca
+      - sblocca
+    Time:
+      - secondi
+      - minuti
+      - ore

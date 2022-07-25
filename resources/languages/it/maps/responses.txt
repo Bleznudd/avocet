@@ -1,0 +1,18 @@
+# This is actually not a map, but an array of standard responses (or part of) 
+#
+[
+    " ", #---------------------------------------- 0
+    " è ", #----------------------------------------- 1
+    " a ", #----------------------------------------- 2
+    " a ", #----------------------------------------- 3
+    " proprietà ", #----------------------------------- 4
+    " dispositivo ", #------------------------------------- 5
+    " azione ", #------------------------------------- 6
+    " Ho impostato ", #--------------------------- 7
+    " Non ho potuto impostare ", #------------------------ 8
+    " Non ho potuto trovare ", #----------------------- 9
+    " Non ho potuto eseguire ", #------------------- 10
+    " Non conosco questa tipologia di intenzione ", #------------ 11
+    " Ho incontrato un errore inaspettato ", # ---- 12
+    " Non ho potuto recuperare l'audio di risposta ", # - 13
+]
