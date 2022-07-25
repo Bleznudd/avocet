@@ -14,7 +14,7 @@ context:
     getOnOffProperty:
       - is (the) ($Location:location) $Thing:thing [on, off]
       - have I left (the) ($Location:location) $Thing:thing [on, off]
-      - has we left (the) ($Location:location) $Thing:thing [on, off]
+      - have we left (the) ($Location:location) $Thing:thing [on, off]
       - has someone left (the) ($Location:location) $Thing:thing [on, off]
       - has (the) ($Location:location) $Thing:thing [started, stopped]
     getOpenProperty:
@@ -252,3 +252,7 @@ context:
       - night
       - lock
       - unlock
+    Time:
+      - seconds
+      - minutes
+      - hours
