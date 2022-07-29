@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-    - v[0-9]+.[0-9]+.[0-9]+
+    - v[0-9]+.[0-9]+
 
 jobs:
   create-release:
@@ -16,7 +16,7 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
+        release_name: ${{ github.ref }}
         draft: false
         prerelease: false
     - name: Dump upload url to file
@@ -32,43 +32,17 @@ jobs:
     strategy:
       matrix:
         platform: [
-          'linux-arm',
-          'linux-arm64',
-          'linux-x64',
-          'darwin-x64',
+          'linux-arm'
         ]
         pair: [
-          'python:3.5',
-          'python:3.6',
-          'python:3.7',
-          'python:3.8',
-          'python:3.9',
+          'python:3.7'
         ]
         include:
           - platform: 'linux-arm'
             host-os: 'ubuntu-latest'
-          - platform: 'linux-arm64'
-            host-os: 'ubuntu-latest'
-          - platform: 'linux-x64'
-            host-os: 'ubuntu-latest'
-          - platform: 'darwin-x64'
-            host-os: 'macos-latest'
-          - pair: 'python:3.5'
-            language: 'python'
-            version: '3.5'
-          - pair: 'python:3.6'
-            language: 'python'
-            version: '3.6'
           - pair: 'python:3.7'
             language: 'python'
             version: '3.7'
-          - pair: 'python:3.8'
-            language: 'python'
-            version: '3.8'
-          - pair: 'python:3.9'
-            language: 'python'
-            version: '3.9'
-
     runs-on: ${{ matrix.host-os }}
 
     steps:
@@ -87,7 +61,7 @@ jobs:
         python-version: ${{ matrix.version }}
     - name: Build adapter
       run: |
-        ./build.sh "${{ matrix.platform }}" "${{ matrix.language }}" "${{ matrix.version }}"
+        ./package.sh "${{ matrix.platform }}" "${{ matrix.language }}" "${{ matrix.version }}"
     - name: Upload Release Asset
       id: upload-release-asset
       uses: actions/upload-release-asset@v1.0.1
@@ -95,8 +69,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ env.UPLOAD_URL }}
-        asset_path: eufy-adapter-${{ env.RELEASE_VERSION }}-${{ matrix.platform }}-v${{ matrix.version }}.tgz
-        asset_name: eufy-adapter-${{ env.RELEASE_VERSION }}-${{ matrix.platform }}-v${{ matrix.version }}.tgz
+        asset_path: avocet-${{ env.RELEASE_VERSION }}.tgz
+        asset_name: avocet-${{ env.RELEASE_VERSION }}.tgz
         asset_content_type: application/gnutar
     - name: Upload Release Asset Checksum
       id: upload-release-asset-checksum
@@ -105,6 +79,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ env.UPLOAD_URL }}
-        asset_path: eufy-adapter-${{ env.RELEASE_VERSION }}-${{ matrix.platform }}-v${{ matrix.version }}.tgz.sha256sum
-        asset_name: eufy-adapter-${{ env.RELEASE_VERSION }}-${{ matrix.platform }}-v${{ matrix.version }}.tgz.sha256sum
+        asset_path: avocet-${{ env.RELEASE_VERSION }}.tgz.sha256sum
+        asset_name: avocet-${{ env.RELEASE_VERSION }}.tgz.sha256sum
         asset_content_type: text/plain

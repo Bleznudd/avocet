@@ -9,7 +9,6 @@ if [ -z "${ADDON_ARCH}" ]; then
   TARFILE_SUFFIX=
 else
   PYTHON_VERSION="$(python3 --version 2>&1 | cut -d' ' -f2 | cut -d. -f 1-2)"
-  TARFILE_SUFFIX="-${ADDON_ARCH}-v${PYTHON_VERSION}"
 fi
 
 # Clean up from previous releases
@@ -33,7 +32,7 @@ find . -type f \! -name SHA256SUMS -exec shasum --algorithm 256 {} \; >> SHA256S
 cd -
 
 # Make the tarball
-TARFILE="avocet-${version}${TARFILE_SUFFIX}.tgz"
+TARFILE="avocet-${version}.tgz"
 tar czf ${TARFILE} package
 
 shasum --algorithm 256 ${TARFILE} > ${TARFILE}.sha256sum
