@@ -55,6 +55,8 @@
         "fumo":"SmokeProperty",
     },
     "setOnOffProperty":"OnOffProperty",
+    "setOnOffProperty_to_on":"OnOffProperty",
+    "setOnOffProperty_to_off":"OnOffProperty",
     "setColorProperty":"ColorProperty",
     "setLevelProperty":"LevelProperty",
     "exeAction":"exeAction",

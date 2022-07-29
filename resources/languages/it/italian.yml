@@ -7,44 +7,47 @@ context:
     getFirstProperty:
       - (per favore)(puoi)(dirmi) come è [il, lo, la] $Thing:thing (in)(della) ($Location:location)
     getOnOffProperty:
-      - è (stato)(stata) [acceso, spento] [il, lo, la] $Thing:thing 
-      - è (stato)(stata) [accesa, spenta] [il, lo, la] $Thing:thing 
-      - ho lasciato [il, lo, la] $Thing:thing è [acceso, spento]
-      - ho lasciato [il, lo, la] $Thing:thing è [accesa, spenta]
+      - è (stato)(stata) [acceso, accesa, spento, spenta] [il, lo, la] $Thing:thing (in)(della) ($Location:location)
+      - ho lasciato [il, lo, la] $Thing:thing (in)(della) ($Location:location) [acceso, accesa, spento, spenta]
+      - (per favore) [il, lo, la] $Thing:thing (in)(della) ($Location:location) è [acceso, accesa, spento, spenta]
     getOpenProperty:
-      - è (stato)(stata) [aperto, chiuso] [il, lo, la] $Thing:thing 
-      - è (stato)(stata) [aperta, chiusa] [il, lo, la] $Thing:thing 
-      - ho lasciato [il, lo, la] $Thing:thing è [aperto, chiuso]
-      - ho lasciato [il, lo, la] $Thing:thing è [aperta, chiusa]
+      - è (stato)(stata) [aperto, aperta, chiuso, chiusa] [il, lo, la] $Thing:thing (in)(della) ($Location:location)
+      - ho lasciato [il, lo, la] $Thing:thing (in)(della) ($Location:location) [aperto, aperta, chiuso, chiusa]
     getLockedProperty:
-      - è (stato)(stata) chiuso a chiave [il, lo, la] $Thing:thing 
-      - è (stato)(stata) chiusa a chiave [il, lo, la] $Thing:thing 
-      - ho lasciato [il, lo, la] $Thing:thing è [bloccato, sbloccato]
-      - ho lasciato [il, lo, la] $Thing:thing è [bloccata, sbloccata]
-      - ho lasciato [il, lo, la] $Thing:thing è chiuso a chiave
-      - ho lasciato [il, lo, la] $Thing:thing è chiusa a chiave
-      - ho chiuso a chiave [il, lo, la] $Thing:thing 
+      - è (stato)(stata) [chiuso, chiusa] a chiave [il, lo, la] $Thing:thing (in)(della) ($Location:location)
+      - ho lasciato [il, lo, la] $Thing:thing (in)(della) ($Location:location) [bloccato, bloccata, sbloccato, sbloccata]
+      - ho lasciato [il, lo, la] $Thing:thing (in)(della) ($Location:location) [chiuso, chiusa] a chiave
+      - ho chiuso a chiave [il, lo, la] $Thing:thing (in)(della) ($Location:location)
     getPushedProperty:
-      - è (stato) [premuto, schiacciato] [il, lo, la] $Thing:thing 
+      - è (stato) [premuto, premuta, schiacciato, schiacciata] [il, lo, la] $Thing:thing (in)(della) ($Location:location)
     setGeneralProperty:
-      - (per favore) imposta [il, lo, la] $Property:property [del, della] $Thing:thing [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
-      - (per favore) cambia [il, lo, la] $Property:property [del, della] $Thing:thing [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
-      - (per favore) sposta [il, lo, la] $Property:property [del, della] $Thing:thing [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
-      - (per favore) alza [il, lo, la] $Property:property [del, della] $Thing:thing [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
-      - (per favore) abbassa [il, lo, la] $Property:property [del, della] $Thing:thing [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
+      - (per favore) imposta [il, lo, la] $Property:property [del, della] $Thing:thing (in)(della) ($Location:location) [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
+      - (per favore) cambia [il, lo, la] $Property:property [del, della] $Thing:thing (in)(della) ($Location:location) [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
+      - (per favore) sposta [il, lo, la] $Property:property [del, della] $Thing:thing (in)(della) ($Location:location) [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
+      - (per favore) alza [il, lo, la] $Property:property [del, della] $Thing:thing (in)(della) ($Location:location) [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
+      - (per favore) abbassa [il, lo, la] $Property:property [del, della] $Thing:thing (in)(della) ($Location:location) [a, su] [$pv.TwoDigitInteger:value, $ColorStatus:color, $OnOffStatus:status, $HeatStatus:heat] (percento) (per favore)
     setOnOffProperty:
       - (per favore) imposta [il, lo, la] $Thing:thing (in) ($Location:location) [a, su] $OnOffStatus:status (per favore)
+    setOnOffProperty_to_on:
+      - (per favore) accendi [il, lo, la] $Thing:thing (in) ($Location:location) (per favore)
+      - (per favore) attiva [il, lo, la] $Thing:thing (in) ($Location:location) (per favore)
+    setOnOffProperty_to_off:
+      - (per favore) spegni [il, lo, la] $Thing:thing (in) ($Location:location) (per favore)
+      - (per favore) disattiva [il, lo, la] $Thing:thing (in) ($Location:location) (per favore)
     setColorProperty:
       - (per favore) imposta [il, lo, la] $Thing:thing (in) ($Location:location) [a, su] $ColorStatus:color (per favore)
       - (per favore) imposta [a, su] $ColorStatus:color [il, lo, la] $Thing:thing (in) ($Location:location) (per favore)
       - (per favore) cambia [il, lo, la] $Thing:thing (in) ($Location:location) [a, su] $ColorStatus:color (per favore)
+      - (per favore) cambia [a, su] $ColorStatus:color [il, lo, la] $Thing:thing (in) ($Location:location) (per favore)
+      - (per favore) colora [il, lo, la] $Thing:thing (in) ($Location:location) di $ColorStatus:color (per favore)
     setLevelProperty:
       - (per favore) imposta [il, lo, la] $Thing:thing (in) ($Location:location) [a, su] [$pv.TwoDigitInteger:value] (percento) (per favore)
       - (per favore) imposta [a, su] [$pv.TwoDigitInteger:value] (percento) [il, lo, la] $Thing:thing (in) ($Location:location) (per favore)
       - (per favore) alza (il volume) [del, della] $Thing:thing (in) ($Location:location) [a, su] [$pv.TwoDigitInteger:value] (percento) (per favore)
       - (per favore) abbassa (il volume) [del, della] $Thing:thing (in) ($Location:location) [a, su] [$pv.TwoDigitInteger:value] (percento) (per favore)
     exeAction:
-      - (per favore) imposta [il, lo, la] $Thing:thing (in) ($Location:location) [a, su] $Action:action (per favore)
+      - (per favore) imposta [il, lo, la] $Thing:thing (in)(del)(sul) ($Location:location) [a, su] $Action:action (per favore)
+      - (per favore) $Action:action [il, lo, la] $Thing:thing (in)(del)(sul) ($Location:location) (per favore)
     specialSelfName:
       - qual è il tuo nome
       - come ti chiami
@@ -176,12 +179,18 @@ context:
     Location:
       - dentro
       - fuori
+      - ingresso
+      - retro
       - corridoio
+      - camera
+      - cameretta
       - camera da letto
       - letto
       - cucina
       - bagno
       - doccia
+      - vasca
+      - vasca da bagno
       - garage
       - rimessa
       - autorimessa
@@ -191,8 +200,12 @@ context:
       - scale
       - tetto
       - solaio
+      - attico
+      - ascensore
+      - rampa
       - salotto
       - divano
+      - poltrona
       - ufficio
       - scrivania
       - portico

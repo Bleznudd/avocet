@@ -42,33 +42,38 @@ To use this adapter you will need to name things in a logic way, using a combina
 
 There are currently available +50 device names and +20 locations, for +1000 possible combinations
 
-### Customization
+#### Customization
 
 Since all the intents, things, properties and actions are defined in one single [yaml](./resources/languages/en/english.yml), customization is trivial.
 Upon editing the file with your custom phrase, you can upload it on the [picovoice console](https://console.picovoice.ai/) and train a new model. The obtained file needs to be unpacked and copied to replace the original one
 
 ### Available languages
 
-As of February 2022, Picovoice is available 4 languages:
+As of July 2022, Picovoice is available 8 languages:
 
 - English <sup>1</sup>
-- German <sup>3</sup>
+- Italian <sup>1</sup>
 - French <sup>2</sup>
+- German <sup>3</sup>
 - Spanish <sup>3</sup>
+- Portuguese <sup>3</sup>
+- Japanese <sup>4</sup>
+- Korean <sup>4</sup>
 
 <small>
 
-<sup>1</sup> Avocet fully support this language
-<sup>2</sup> Avocet has the language available as a demo with limited functionality
-<sup>3</sup> Avocet has no valid translation yet, not even for a demo
+<sup>1</sup> Avocet fully support this language <br>
+<sup>2</sup> Avocet has the language available as a demo with limited functionality <br>
+<sup>3</sup> Avocet has no valid translation yet, not even for a demo <br>
+<sup>4</sup> Avocet may not work with this language <br>
 
 </small>
 
-as of now, this repository fully support **only** the [English maps](./resources/languages/en/maps) and [English intent yaml](./resources/languages/en/english.yml) file (and the corresponding trained model). To use other languages, these files need to be translated, then used as a training base to get the model, that can later be added to the project.
+to add or enhance a language, [English maps](./resources/languages/en/maps) and [English intent yaml](./resources/languages/en/english.yml) files needs to be translated, then used as a training base to get the model, that can later be added to the project.
 
 
 > **NOTE:**
-> I do not know this languages (apart from English) and thus I cannot implement them by myself. If you feel like you could be a translator, open an issue to discuss this opportunity, or even better a PR
+> I do not know this languages (apart from Italian and English) and thus I cannot implement them by myself. If you feel like you could be a translator, open an issue to discuss this opportunity, or even better a PR
 
 ## Hardware support
 

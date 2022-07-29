@@ -15,7 +15,7 @@
     "specialTellJoke":[
         "\"Qual è la nazione preferita dalle galline? Il Portogallo\"",
         "\"Il marinaio spiegò le vele al vento, ma il vento non capì\"",
-        "\"Che vitaccia - esclamò l'operaio - ci vorrebbe un cacciavite più grosso\""
+        "\"Che vitaccia, esclamò l'operaio, ci vorrebbe un cacciavite più grosso\""
     ],
     "specialFlipCoin":[
         "\"La moneta mostra \" + (\"testa\" if random() < 0.5 else \"croce\")" 

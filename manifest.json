@@ -6,7 +6,7 @@
       "exec": "python3 {path}/main.py",
       "primary_type": "adapter",
       "strict_max_version": "*",
-      "strict_min_version": "0.1"
+      "strict_min_version": "1.0.0"
     }
   },
   "homepage_url": "https://github.com/Bleznudd/avocet",
@@ -18,7 +18,7 @@
   "version": "0.1",
   "options": {
     "default": {
-      "language": "eng",
+      "language": "en",
       "wakeword": "avocet",
       "pitch": "1.00"
     },
@@ -60,11 +60,13 @@
           "description": "Select the voice pitch of the assistant",
           "type": "string",
           "enum": [
+            "0.80",
             "0.90",
             "0.95",
             "1.00",
             "1.05",
-            "1.10"
+            "1.10",
+            "1.20"
           ]
         }
       }

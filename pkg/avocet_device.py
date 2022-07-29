@@ -32,10 +32,10 @@ class avocetDevice(Device):
         self.intent = ""
         self.volume = 50 #%
         self.voice_service = VoiceThread(
-            # Wakewords are set to be always the ones with english accent
-            os.path.join(os.path.dirname(__file__), '../resources/languages/en/wake/' + self.adapter.wakeword + '_raspberry-pi.ppn'),
+            # Wakewords are currently in english also for other languages, except Italian though we only have "avocet" available
+            os.path.join(os.path.dirname(__file__), '../resources/languages/' + self.adapter.language + '/wake/' + self.adapter.wakeword + '_raspberry-pi.ppn'),
             os.path.join(os.path.dirname(__file__), '../resources/languages/' + self.adapter.language + '/default_raspberry-pi.rhn'),
-            os.path.join(os.path.dirname(__file__), '../resources/languages/en/porcupine_params_en.pv'),
+            os.path.join(os.path.dirname(__file__), '../resources/languages/' + self.adapter.language + '/porcupine_params_' + self.adapter.language + '.pv'),
             os.path.join(os.path.dirname(__file__), '../resources/languages/' + self.adapter.language + '/rhino_params_' + self.adapter.language + '.pv'),
             self.adapter.access_key, 
             self.set_intent
@@ -126,6 +126,8 @@ class avocetDevice(Device):
             if 'thing' in intent.get('slots')[0]:
                 if 'location' in intent.get('slots')[0]:
                     target = self.adapter.get_href(intent.get('slots')[0].get('location') + " " + intent.get('slots')[0].get('thing'))
+                    if isinstance(target, type(None)):
+                        target = self.adapter.get_href(intent.get('slots')[0].get('thing') + " " + intent.get('slots')[0].get('location'))
                 else:
                     target = self.adapter.get_href(intent.get('slots')[0].get('thing'))
             else:
@@ -235,12 +237,14 @@ class VoiceThread(threading.Thread):
             response = {
                 "is_understood" : inference.is_understood,
                 "intent_type" : (0 if inference.intent[:3] == "get" else (1 if inference.intent[:3] == "set" else (2 if inference.intent[:3] == "exe" else 3))), # get = 0, set = 1, action = 2, special = 3
-                "intent" : inference.intent,
+                "intent" : inference.intent.split('_')[0],
                 "slots" : [{}]
             }
             response 
             for slot, value in inference.slots.items():
                 response.get('slots')[0][slot] = value
+            if len(inference.intent.split('_')) > 1:
+                response.get('slots')[0][inference.intent.split('_')[1]] = inference.intent.split('_')[2]
             for slot in response.get('slots'):
                 for i in ['status', 'color', 'value', 'heat', 'action']:
                     if i in slot:
