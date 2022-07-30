@@ -4,11 +4,13 @@ Lightweight, local and polyglot voice assistant for the WebThings Gateway.
 Built around PicoVoice and the Respeaker 2-MIC hat.
 
 > :warning: **Warning**
-> This software is still in an early stage of development, and has not reached the production grade yet.
-> If you want to try it, clone this repository on the pi and restart the webthings service
+> This software is still in an early stage of development, some bugs are expected.
+> If you want to try it, download the latest release, unpack and restart the gateway service
 > ```
 > cd /home/pi/.webthings/addons/
-> git clone https://github.com/Bleznudd/avocet.git
+> wget https://github.com/Bleznudd/avocet/releases/download/v0.1/avocet-0.1.tgz
+> tar -xf avocet-0.1.tgz
+> mv package avocet
 > sudo systemctl restart webthings-gateway.service
 > ```
 > then enable it from the extensions page
